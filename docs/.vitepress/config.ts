@@ -1,5 +1,13 @@
 import { defineConfig } from 'vitepress'
 
+type SearchScopeGetter = () => string
+
+declare global {
+  interface Window {
+    __getSearchScope?: SearchScopeGetter
+  }
+}
+
 export default defineConfig({
   lang: 'zh-CN',
   title: 'AI 学习站',
@@ -61,6 +69,7 @@ export default defineConfig({
           items: [
             { text: '1. 什么是 Claude Code', link: '/claude-code/guide/intro' },
             { text: '2. 系统要求', link: '/claude-code/guide/requirements' },
+            { text: '📦 Node.js 与 npm 入门（可选）', link: '/claude-code/guide/nodejs' },
             { text: '3. 安装', link: '/claude-code/guide/install' },
             { text: '4. 登录认证', link: '/claude-code/guide/auth' },
             { text: '5. 快速开始', link: '/claude-code/guide/quickstart' },
@@ -103,31 +112,31 @@ export default defineConfig({
           text: '集成与自动化',
           collapsed: false,
           items: [
-            { text: 'GitHub Actions 集成', link: '/claude-code/integration/github-actions' },
-            { text: 'Agents SDK 开发指南', link: '/claude-code/integration/agents-sdk' },
+            { text: '21. GitHub Actions 集成', link: '/claude-code/integration/github-actions' },
+            { text: '22. Agents SDK 开发指南', link: '/claude-code/integration/agents-sdk' },
           ],
         },
         {
           text: '实战案例',
           collapsed: false,
           items: [
-            { text: '案例总览', link: '/claude-code/cases/' },
-            { text: '案例1：从零搭建全栈项目', link: '/claude-code/cases/fullstack' },
-            { text: '案例2：遗留代码重构', link: '/claude-code/cases/refactor' },
-            { text: '案例3：复杂 Bug 调试', link: '/claude-code/cases/debug' },
+            { text: '23. 实战案例总览', link: '/claude-code/cases/' },
+            { text: '24. 案例 1：从零搭建全栈项目', link: '/claude-code/cases/fullstack' },
+            { text: '25. 案例 2：遗留代码重构', link: '/claude-code/cases/refactor' },
+            { text: '26. 案例 3：复杂 Bug 调试', link: '/claude-code/cases/debug' },
           ],
         },
         {
           text: '技巧与参考',
           collapsed: false,
           items: [
-            { text: '21. 最佳实践', link: '/claude-code/tips/best-practices' },
-            { text: '22. 常见工作流', link: '/claude-code/tips/workflows' },
-            { text: '23. 并行与自动化', link: '/claude-code/tips/parallel' },
-            { text: '24. IDE 集成', link: '/claude-code/tips/ide' },
-            { text: '25. 故障排除', link: '/claude-code/tips/troubleshoot' },
-            { text: '26. 术语表', link: '/claude-code/tips/glossary' },
-            { text: '27. 资源链接', link: '/claude-code/tips/resources' },
+            { text: '27. 最佳实践', link: '/claude-code/tips/best-practices' },
+            { text: '28. 常见工作流', link: '/claude-code/tips/workflows' },
+            { text: '29. 并行与自动化', link: '/claude-code/tips/parallel' },
+            { text: '30. IDE 集成', link: '/claude-code/tips/ide' },
+            { text: '31. 故障排除', link: '/claude-code/tips/troubleshoot' },
+            { text: '32. 术语表', link: '/claude-code/tips/glossary' },
+            { text: '33. 资源链接', link: '/claude-code/tips/resources' },
           ],
         },
         {
@@ -431,9 +440,9 @@ export default defineConfig({
         // 按"搜索范围"全局状态过滤结果（状态由 SearchScope 组件维护，挂在 window）
         miniSearch: {
           searchOptions: {
-            filter(result: any) {
+            filter(result: { id?: string }) {
               if (typeof window === 'undefined') return true
-              const getter = (window as any).__getSearchScope
+              const getter = window.__getSearchScope
               if (typeof getter !== 'function') return true
               const scope = getter()
               if (!scope || scope === 'all') return true

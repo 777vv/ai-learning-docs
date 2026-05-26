@@ -1,14 +1,19 @@
-# 25. 故障排除
+# 31. 故障排除
 
 ::: info 本章你将学到
-- 诊断工具的使用方法
-- 常见错误的原因和修复步骤
-- 如何获取帮助
+- 出问题时**第一步该跑什么**（诊断三件套）
+- 16 类常见问题的原因和修复（按出现频率排）
+- Windows 专项排错段
+- 怎么提交一个好的 bug report
 :::
 
-## 25.1 诊断工具
+::: tip 用法：直接搜
+本章用 <kbd>Ctrl+F</kbd>（macOS <kbd>Cmd+F</kbd>）搜你遇到的报错关键字，比按章节读快得多。
+:::
 
-遇到问题，先跑这些命令：
+## 25.1 诊断三件套（出问题先跑这三个）
+
+按这个顺序跑，定位精准到每一层：
 
 ```bash
 # 全面诊断（首选）
@@ -107,7 +112,9 @@ apk add libgcc libstdc++ ripgrep
 }
 ```
 
-## 25.6 Windows 找不到 Git Bash
+## 25.6 Windows 专项排错
+
+### Git Bash 找不到
 
 ```json
 {
@@ -116,6 +123,49 @@ apk add libgcc libstdc++ ripgrep
   }
 }
 ```
+
+如果 Git for Windows 装在非默认位置，把路径改对。
+
+### PowerShell 报 "`irm` is not recognized"
+
+你在 CMD 里跑了 PowerShell 命令。换成 CMD 版安装：
+
+```cmd
+curl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd && del install.cmd
+```
+
+### PowerShell 报 "The token '&&' is not a valid statement separator"
+
+你在 PowerShell 里跑了 CMD 命令。换成 PS 版安装：
+
+```powershell
+irm https://claude.ai/install.ps1 | iex
+```
+
+### `wsl --install` 报错 `0x80370102`
+
+BIOS 里没开 CPU 虚拟化。重启进 BIOS，找 `VT-x` (Intel) 或 `SVM` (AMD) 开启。详见 [Node.js 入门](/claude-code/guide/nodejs#方案-a-wsl2-nvm)。
+
+### 环境变量设了但 Claude 读不到
+
+Windows 的 `setx` 命令**不会立即生效**，必须**关掉再开新 CMD/PowerShell** 才能读到。
+
+确认环境变量是否真的存在：
+```powershell
+# PowerShell
+[Environment]::GetEnvironmentVariable("ANTHROPIC_API_KEY", "User")
+```
+
+### 中文路径报错
+
+Windows 默认编码可能不是 UTF-8。把 PowerShell 切到 UTF-8：
+
+```powershell
+chcp 65001
+$env:PYTHONIOENCODING = "utf-8"
+```
+
+或者把项目路径换成纯英文（最稳）。
 
 ## 25.7 Claude 不遵循 CLAUDE.md
 
@@ -194,7 +244,37 @@ echo '{"toolName":"Write","filePath":"test.ts"}' | \
 }
 ```
 
-## 25.12 获取帮助
+## 25.12 怎么提交一个好的 Bug Report
+
+如果上面都试过还是不行，要去 Discord / GitHub 报 bug。**好的 bug report 5 倍快被回复**：
+
+```markdown
+## 环境
+- OS: macOS 14.5 / Windows 11 / Ubuntu 22.04
+- Claude Code 版本: （跑 `claude --version`）
+- 终端: iTerm2 / Windows Terminal / Git Bash
+- Node.js 版本（如适用）: （跑 `node --version`）
+
+## 怎么复现
+1. 跑这条命令: `claude xxx`
+2. 在第 N 步发生错误
+
+## 期望
+（应该发生什么）
+
+## 实际
+（实际发生了什么 + 完整报错截图或文本）
+
+## 已经试过的（避免重复让对方建议）
+- claude doctor 输出:（贴出来）
+- 是否能在另一个干净项目复现:（是 / 否）
+- 是否能用 --bare 模式复现:（试 `claude --bare`）
+
+## 调试日志（如果不涉及敏感信息）
+（跑 `claude --debug-file /tmp/debug.log --debug "api"`，附在 issue 里）
+```
+
+## 25.13 获取帮助
 
 | 渠道 | 说明 |
 |------|------|
@@ -204,3 +284,4 @@ echo '{"toolName":"Write","filePath":"test.ts"}' | \
 | 🐙 GitHub Issues | [github.com/anthropics/claude-code/issues](https://github.com/anthropics/claude-code/issues) |
 | 💡 会话内 | 输入 `/help`，或直接问 Claude「怎么...」|
 | 📮 反馈 | `/feedback` 或 `/bug` |
+| 💬 本站学习群 | [学习与交流](/community)（中文社区）|

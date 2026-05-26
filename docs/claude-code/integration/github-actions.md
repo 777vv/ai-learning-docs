@@ -1,4 +1,4 @@
-# GitHub Actions 集成
+# 21. GitHub Actions 集成
 
 ::: info 本章你将学到
 - 一键配置 GitHub App
@@ -156,3 +156,7 @@ claude -p "任务" --output-format json | jq '.result'
 - 对于会修改代码的 workflow，先在测试仓库验证
 - 设置 `--max-budget-usd` 防止意外产生大额费用
 :::
+
+---
+
+下一步：[22. Agents SDK 开发指南 →](/claude-code/integration/agents-sdk)

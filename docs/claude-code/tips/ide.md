@@ -1,4 +1,4 @@
-# 24. IDE 集成
+# 30. IDE 集成
 
 ::: info 本章你将学到
 - VS Code 和 Cursor 插件安装和使用

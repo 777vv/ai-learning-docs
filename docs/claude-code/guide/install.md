@@ -6,6 +6,11 @@
 - 如何验证安装和卸载
 :::
 
+::: tip 没碰过命令行 / Node.js 的人先看这里
+- **走「官方脚本」或 Windows「WinGet」**：照着本章做，**不需要装 Node.js**，最省事 → 直接看 3.2 / 3.3
+- **走「npm」路径**：需要 Node.js 18+，先回头看 [Node.js 与 npm 入门（可选）](/claude-code/guide/nodejs) → 再回这里看 3.6
+:::
+
 ## 3.1 安装方式对比
 
 | 方式 | 平台 | 是否自动更新 | 推荐程度 |
@@ -102,28 +107,60 @@ curl -fsSL https://downloads.claude.ai/claude-code/apk/install.sh | sh
 
 ## 3.6 方式五：npm
 
-::: warning 注意
-- 需要 **Node.js 18+**
-- **不要**使用 `sudo npm install -g`，会导致权限问题
+::: warning 前置条件
+- 必须有 **Node.js 18+**——没装的话先去 [Node.js 与 npm 入门（可选）](/claude-code/guide/nodejs) 装好
+- **不要**用 `sudo npm install -g`，会导致后续无穷无尽的权限问题
 :::
 
+**第 1 步**：确认 Node.js 与 npm 在位
+```bash
+node --version   # 应输出 v18.x.x 或更高
+npm --version    # 应输出 9.x.x 或更高
+```
+如果命令找不到，回头看 [Node.js 入门](/claude-code/guide/nodejs)。
+
+**第 2 步**：装 Claude Code
 ```bash
 npm install -g @anthropic-ai/claude-code
 ```
 
-如果遇到权限问题，先配置 npm 全局目录：
+国内用户如果卡住，先换淘宝镜像（[详见这里](/claude-code/guide/nodejs#国内-npm-加速-强烈推荐)）：
+```bash
+npm config set registry https://registry.npmmirror.com
+npm install -g @anthropic-ai/claude-code
+```
+
+**第 3 步**：验证装好了
+```bash
+claude --version
+# 应输出: claude-code/2.x.x
+```
+
+### 如果报权限错（EACCES）
+
+**绝对不要用 `sudo`**——那会污染 npm 全局目录的所有权，之后每次装包都得 sudo，越搞越乱。
+
+正确做法是给 npm 换一个用户可写的全局目录：
 
 ```bash
-# 创建用户级 npm 全局目录
+# 1. 创建用户级 npm 全局目录
 mkdir ~/.npm-global
+
+# 2. 让 npm 指向那里
 npm config set prefix '~/.npm-global'
 
-# 添加到 PATH（加到 ~/.bashrc 或 ~/.zshrc）
-export PATH=~/.npm-global/bin:$PATH
+# 3. 把它加进 PATH（写进 ~/.bashrc 或 ~/.zshrc）
+echo 'export PATH=~/.npm-global/bin:$PATH' >> ~/.bashrc
+source ~/.bashrc
+# zsh 用户把 .bashrc 换成 .zshrc
 
-# 重新安装
+# 4. 重新装
 npm install -g @anthropic-ai/claude-code
 ```
+
+::: tip 更省心的做法：用 nvm
+如果你还没装 Node.js，**直接用 nvm 装**——nvm 自带用户级路径，根本不会遇到权限问题。见 [Node.js 入门](/claude-code/guide/nodejs#为什么用-nvm-而不是直接装)。
+:::
 
 ## 3.7 验证安装
 

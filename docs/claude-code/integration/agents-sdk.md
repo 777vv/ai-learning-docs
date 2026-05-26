@@ -1,4 +1,4 @@
-# Agents SDK 开发指南
+# 22. Agents SDK 开发指南
 
 ::: info 本章你将学到
 - 什么是 Agents SDK
@@ -289,3 +289,7 @@ console.log(await chat('有什么常见的应用场景？'))
 | `claude-haiku-4-5` | 速度最快、最便宜 | 简单分类、快速问答 |
 
 完整 API 文档：[docs.anthropic.com](https://docs.anthropic.com)
+
+---
+
+下一步：[23. 实战案例总览 →](/claude-code/cases/)

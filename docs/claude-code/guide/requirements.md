@@ -16,8 +16,19 @@
 | Debian | 10 (Buster) 及以上 |
 | Alpine Linux | 3.19 及以上 |
 
-::: warning Windows 用户注意
-Windows 原生安装需要先安装 [Git for Windows](https://git-scm.com/downloads/win)，因为 Claude Code 内部使用 Git Bash 执行命令。如果你使用 WSL（Windows Subsystem for Linux），则按 Linux 方式处理，不需要额外安装。
+::: warning Windows 用户必看：为什么需要 Git？
+Windows 原生安装前，先去装 [Git for Windows](https://git-scm.com/downloads/win)。
+
+**为什么 Claude Code 需要 Git？** Claude Code 内部用 Git 附带的 **Git Bash** 跑各种命令——它需要 Unix 风格的 shell（`grep`、`ls`、`cat` 等命令）才能正常工作，而 Windows 自带的 PowerShell 不提供这些。装 Git for Windows 后，Git Bash 就有了。
+
+**怎么装**：
+1. 下载 [Git for Windows 安装器](https://git-scm.com/downloads/win)
+2. 双击 `.exe`，**一路 Next 默认就行**，安装时确认勾选「Add Git to PATH」
+3. 装完打开 **新的** PowerShell 跑 `git --version`，能输出版本号就成功
+
+::: tip 用 WSL 的人不用装
+如果你打算用 WSL（Windows Subsystem for Linux），按 Linux 方式处理，**不需要**额外装 Git for Windows。
+:::
 :::
 
 ## 2.2 硬件要求
@@ -43,6 +54,11 @@ Claude Code **不支持**免费的 claude.ai 账号，必须是以下之一：
 | **Amazon Bedrock** | AWS 托管 | AWS 用户 |
 | **Google Vertex AI** | GCP 托管 | GCP 用户 |
 
+::: tip 几个名词的解释
+- **Anthropic Console** = Anthropic 官方的 API 控制台（[console.anthropic.com](https://console.anthropic.com)），充钱、拿 API Key、看用量都在这里。**按量付费**，没有 $20 月费，但需要按 token 计费
+- **Amazon Bedrock / Google Vertex AI** = AWS / GCP 的"托管 Anthropic 模型"服务，企业级合规场景才用，普通人不用看
+:::
+
 ::: tip 推荐方案
 - **个人开发者**：Claude Pro（$20/月）是性价比最高的起点
 - **国内用户**：可以通过 [硅基流动](/claude-code/china/models) 等服务商使用国内镜像，无需订阅官方
@@ -57,8 +73,12 @@ Claude Code **不支持**免费的 claude.ai 账号，必须是以下之一：
 | 国内服务商 | 可直连，无需代理（如硅基流动、通义千问） |
 | 代码库分析 | 仅本地，不上传代码到 Anthropic（工具调用在本机执行）|
 
-::: info 代码隐私说明
-Claude Code 在本地运行工具（读文件、执行命令等），只有**你选择发送给模型的内容**才会通过网络传输。Anthropic 的 [隐私政策](https://www.anthropic.com/privacy) 适用。
+::: info 代码隐私说明（小白常误解）
+**"代码库分析仅本地"** 是说：Claude Code **运行的工具**（读文件、跑命令、改文件）全在你电脑上跑，**不会**把你整个代码库打包传给 Anthropic。
+
+但是——**Claude 写回答时要"看"的内容当然会传**：比如你让它解释 `auth.ts`，那个文件的内容会作为 prompt 上下文发到模型。
+
+简单说：**Claude 想看什么、需要什么上下文**，那一部分会传；其他全在本地。
 :::
 
 ## 2.5 地区支持
@@ -69,4 +89,8 @@ Claude Code 官方支持的国家和地区见 [Anthropic 支持地区列表](htt
 
 ---
 
-下一步：[安装 Claude Code](/claude-code/guide/install)
+下一步：[安装 Claude Code →](/claude-code/guide/install)
+
+::: tip 第一次接触 Node.js / npm？
+如果你打算走 `npm install -g` 路径、或者后面想用 [Agents SDK](/claude-code/integration/agents-sdk)、[GitHub Actions](/claude-code/integration/github-actions)，建议先看一眼 [Node.js 与 npm 入门（可选）](/claude-code/guide/nodejs)。走官方安装脚本 / WinGet / Homebrew 的可以跳过这一节。
+:::
