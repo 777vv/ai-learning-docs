@@ -55,14 +55,19 @@ function load(): ProgressState {
       lastVisit: parsed.lastVisit ?? null,
       read: parsed.read ?? {},
     }
-  } catch {
+  } catch (e) {
+    console.warn('[readingProgress] load failed', e)
     return { lastVisit: null, read: {} }
   }
 }
 
 function save(s: ProgressState) {
   if (typeof window === 'undefined') return
-  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(s)) } catch {}
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(s))
+  } catch (e) {
+    console.warn('[readingProgress] save failed', e)
+  }
 }
 
 export const progress = ref<ProgressState>(load())

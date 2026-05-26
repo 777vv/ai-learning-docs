@@ -1,5 +1,11 @@
 import { ref, watch } from 'vue'
 
+declare global {
+  interface Window {
+    __getSearchScope?: () => Scope
+  }
+}
+
 export type Scope = 'all' | 'claude-code' | 'codex' | 'openclaw' | 'hermes'
 
 export const SCOPE_OPTIONS = [
@@ -46,7 +52,7 @@ if (typeof window !== 'undefined') {
   searchScope.value = loadInitial()
 
   // 暴露给 config.ts 里的 filter 函数读取（client-side 运行时）
-  ;(window as any).__getSearchScope = () => searchScope.value
+  window.__getSearchScope = () => searchScope.value
 
   // 持久化用户选择
   watch(searchScope, (v) => {
@@ -69,9 +75,9 @@ if (typeof window !== 'undefined') {
     if (fromPath !== 'all') searchScope.value = fromPath
   }
   // VitePress 用 history.pushState，监听 popstate 不够，hack 一下 pushState
-  const origPush = history.pushState
-  history.pushState = function (...args: any[]) {
-    const r = origPush.apply(this, args as any)
+  const origPush = history.pushState.bind(history)
+  history.pushState = function (...args: Parameters<typeof history.pushState>) {
+    const r = origPush(...args)
     setTimeout(onPathChange, 0)
     return r
   }
