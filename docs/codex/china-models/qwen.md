@@ -1,4 +1,4 @@
-# 通义千问 保姆级教程
+# 14. 通义千问 保姆级教程
 
 > **官网：** [dashscope.aliyun.com](https://dashscope.aliyun.com) · [阿里云百炼平台](https://bailian.console.aliyun.com)
 >

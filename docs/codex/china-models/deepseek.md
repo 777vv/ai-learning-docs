@@ -1,4 +1,4 @@
-# DeepSeek 保姆级教程
+# 13. DeepSeek 保姆级教程
 
 > **官网：** [platform.deepseek.com](https://platform.deepseek.com)
 >

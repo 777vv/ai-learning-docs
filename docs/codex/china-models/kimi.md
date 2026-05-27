@@ -1,4 +1,4 @@
-# Kimi 保姆级教程
+# 15. Kimi 保姆级教程
 
 > **官网：** [platform.moonshot.cn](https://platform.moonshot.cn)
 >

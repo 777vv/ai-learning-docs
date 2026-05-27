@@ -8,7 +8,7 @@
 - GitHub：https://github.com/777vv/ai-learning-docs
 - Gitee（国内访问更快）：https://gitee.com/vv777/ai-learning-docs
 
-基于 [VitePress](https://vitepress.dev/) 构建，覆盖 主流 AI 工具的完整中文教程，**135 个章节，持续扩展**。
+基于 [VitePress](https://vitepress.dev/) 构建，覆盖 主流 AI 工具的完整中文教程，**138 个章节，持续扩展**。
 
 ---
 
@@ -19,8 +19,8 @@
 | 🦞 **OpenClaw** | 开源个人 AI 助手（接飞书/钉钉/IM 自动化） | 40      | `/openclaw/` |
 | 🧬 **Hermes** | Nous Research 自进化 AI Agent（Python + 多 backend） | 40      | `/hermes/` |
 | 🟠 **Claude Code** | Anthropic 官方 AI 编程助手（代理式） | 33      | `/claude-code/` |
-| 🟢 **Codex** | OpenAI 终端 AI 编程助手（开源 + 国内模型友好） | 22      | `/codex/` |
-| **合计** | | **135** | |
+| 🟢 **Codex** | OpenAI 终端 AI 编程助手（开源 + 国内模型友好） | 25      | `/codex/` |
+| **合计** | | **138** | |
 
 每个工具按统一 **8 段式结构**编排：
 > 入门 → 配置 → 操作 → 进阶 → 国内适配 → 实战案例 → 部署 → 参考
@@ -118,7 +118,7 @@ npm run preview     # 本地预览构建产物
 
 ## 文档维护工具（本站独有）
 
-为了让 135 个章节不至于"加完就过时"，本站内置了一套**自动审计体系**：
+为了让 138 个章节不至于"加完就过时"，本站内置了一套**自动审计体系**：
 
 ```bash
 # 上游变化检测（不调 LLM，30 秒，免费）
@@ -155,7 +155,7 @@ ai-learning-docs/
 │   ├── claude-code/                   # 🟠 Claude Code 33 章
 │   │   ├── guide/ basics/ advanced/ china/ integration/ cases/ tips/
 │   │
-│   ├── codex/                         # 🟢 Codex 22 章
+│   ├── codex/                         # 🟢 Codex 25 章
 │   │   └── guide/ features/ models/ china-models/ advanced/ config/
 │   │
 │   ├── openclaw/                      # 🦞 OpenClaw 40 章
