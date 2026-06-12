@@ -2,7 +2,7 @@
 
 > 面向中文用户的**零基础 AI 工具学习站**——从认识 AI 到精通主流 AI 编程助手 / Agent 框架，一站搞定。
 
-**在线阅读：** https://claude-code-docs-d7esd1zeb50d77a-1310838266.tcloudbaseapp.com
+**在线阅读：** https://learning.yuxi25.cn/
 
 **源码仓库**：
 - GitHub：https://github.com/777vv/ai-learning-docs
@@ -11,6 +11,9 @@
 基于 [VitePress](https://vitepress.dev/) 构建，覆盖 主流 AI 工具的完整中文教程，**138 个章节，持续扩展**。
 
 ---
+
+## 站点首页
+![img.png](img.png)
 
 ## 当前已收录工具
 
