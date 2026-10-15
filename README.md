@@ -200,29 +200,6 @@ ai-learning-docs/
 
 ---
 
-## 学习与交流
-
-想跟着站内 4 大工具一起练手？两个入口任选——**群二维码可能 7 天过期**，更推荐加作者微信（注明"AI 学习站"），作者会邀你进当前活跃群，**长期有效**。
-
-<table>
-  <tr>
-    <td align="center"><b>🦞 学习交流群</b></td>
-    <td align="center"><b>👤 作者微信</b></td>
-  </tr>
-  <tr>
-    <td align="center">
-      <img src="docs/public/qun.png" alt="学习交流群二维码" width="200"/><br/>
-      <sub>扫码入群 · 实时互动</sub>
-    </td>
-    <td align="center">
-      <img src="docs/public/author-wx.png" alt="作者微信二维码" width="200"/><br/>
-      <sub>微信号：<code>yuxi250428</code><br/>群满 / 码失效请加作者</sub>
-    </td>
-  </tr>
-</table>
-
----
-
 ## License
 
 - 文档内容：基于 Anthropic / OpenAI / Nous Research / OpenClaw 等官方公开资料整理，仅供学习参考
